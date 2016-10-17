@@ -1,24 +1,19 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const $ = require('jquery');
+const WeatherDisplay = require('./WeatherDisplay.jsx');
 
 
 class App extends React.Component {
   constructor() {
     super();
-
-    this.state = {
-      location: '',
-      data: []
-    }
   }
 
   render() {
     return (
-      <inputField onUpdateLocation={this.handleUpdateLocation} onSubmit={this.handleSubmitLocation} location={this.state.location}/>
+      <WeatherDisplay />
     )
   }
-
-  }
+}
 
 ReactDOM.render(<App />, document.querySelector('.app'));
