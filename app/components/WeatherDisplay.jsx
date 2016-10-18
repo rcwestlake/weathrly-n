@@ -2,6 +2,17 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const $ = require('jquery');
 
+let dayMap = {
+  '0' : 'Today',
+  '1' : 'Mon',
+  '2' : 'Tue',
+  '3' : 'Wed',
+  '4' : 'Thu',
+  '5' : 'Fri',
+  '6' : 'Sat',
+  '7' : 'Sun'
+}
+
 class WeatherDisplay extends React.Component {
   constructor() {
     super();
@@ -25,7 +36,6 @@ class WeatherDisplay extends React.Component {
         this.setState({
           data: result
         })
-        debugger;
         console.log('first log: ', this.state.data);
         var weatherInfo = this.state.data;
       }.bind(this));
@@ -33,9 +43,8 @@ class WeatherDisplay extends React.Component {
       this.resetLocation()
 
     } else {
-      debugger;
       this.setState({
-        locationHeader: 'Please enter a valid city'
+        locationHeader: 'Please enter a valid city' //or link to Google or weatherunderground
       })
     }
   }
@@ -44,13 +53,6 @@ class WeatherDisplay extends React.Component {
     let retrievedLocation = JSON.parse(localStorage.getItem('location'))
     this.setState({
       location: ''
-    })
-  }
-
-  resetLocation() {
-    this.setState({
-      location: '',
-      locationHeader: ''
     })
   }
 
@@ -66,6 +68,13 @@ class WeatherDisplay extends React.Component {
     this.props.handleSubmit(this.state.location);
     this.setState({
       location: ''
+    })
+  }
+
+  resetLocation() {
+    this.setState({
+      location: '',
+      locationHeader: ''
     })
   }
 
@@ -114,12 +123,11 @@ function DisplayWeather(weatherData) {
 
   weather.forEach((item) => {
     summaryArray.push(<ul key={i}>
-                        <li>{weather[i].date}</li>
-                        <li>High: {weather[i].temp.high}*</li>
-                        <li>Low: {weather[i].temp.high}*</li>
-                        <li>{weather[i].weatherType.chance * 100}% Change of Precip</li>
+                        <li>{dayMap[i]}</li>
+                        <li>High: {weather[i].temp.high}&deg;</li>
+                        <li>Low: {weather[i].temp.high}&deg;</li>
+                        <li>{weather[i].weatherType.chance * 100}% Chance of Precip</li>
                       </ul>)
-  debugger;
   i++;
   })
   return summaryArray;
