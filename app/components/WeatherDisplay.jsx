@@ -124,10 +124,9 @@ function DisplayWeather(weatherData) {
 
   weather.forEach((item) => {
     summaryArray.push(<article key={i}>
-                        <h3>{dayMap[i]}</h3>
-                        <h5>High: {weather[i].temp.high}&deg;</h5>
-                        <h5>Low: {weather[i].temp.high}&deg;</h5>
-                        <h6>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
+                        <h3>{dayMap[i]} - {capitalizeEachWord(weather[i].weatherType.type)}</h3>
+                        <h5 className='temp'><span className='high'>{weather[i].temp.high}&deg;</span> | <span className='low'>{weather[i].temp.low}&deg;</span></h5>
+                        <h6 className='precip'>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
                         <p className='alert'>{DisplayAlert(weather, i)}</p>
                       </article>)
   i++;
@@ -142,6 +141,12 @@ function DisplayAlert(weather, index) {
       <span className='alert'>Severe weather expected. Stay safe.</span>
     )
   }
+}
+
+function capitalizeEachWord(str) {
+    return str.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
 
   module.exports = WeatherDisplay;
