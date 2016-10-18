@@ -9,6 +9,7 @@ class WeatherDisplay extends React.Component {
     this.state = {
       source: 'http://weatherly-api.herokuapp.com/api/weather/',
       location: '',
+      locationHeader: '',
       data: []
     }
   }
@@ -27,14 +28,35 @@ class WeatherDisplay extends React.Component {
         console.log('first log: ', this.state.data);
       }.bind(this));
 
+      this.resetLocation()
+
     } else {
+      debugger;
+      this.setState({
+        locationHeader: 'Please enter a valid city'
+      })
     }
+  }
+
+  componentDidMount() {
+    debugger;
+    let retrievedLocation = JSON.parse(localStorage.getItem('location'))
+    debugger;
+
+  }
+
+  resetLocation() {
+    this.setState({
+      location: '',
+      locationHeader: ''
+    })
   }
 
   handleUpdateLocation(e) {
     this.setState({
       location: (e.target.value)
     })
+    let storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location))
   }
 
   submitHandled(e) {
@@ -46,25 +68,36 @@ class WeatherDisplay extends React.Component {
   }
 
   render() {
+    let data;
+    if (this.state.data.length) {
+      data = JSON.stringify(this.state.data)
+    }
     return (
       <section>
-      <form onSubmit={this.locationAccepted.bind(this)}>
-        <div className="form-group">
-        <input
-        className="form-control"
-        placeholder="Enter city"
-        onChange={this.handleUpdateLocation.bind(this)}
-        value={this.state.location}
-        type="text" />
-        </div>
-        <div>
-        <button type="submit">Get Weather</button>
-        </div>
-      </form>
+        <section className='header'>
+          <div className='title'>weathr<span className='weathr-ly'>ly</span></div>
+          <p>{this.state.locationHeader}</p>
+          <form onSubmit={this.locationAccepted.bind(this)}>
+          <div className="form-group">
+          <input
+          className="form-control"
+          placeholder="Enter city"
+          onChange={this.handleUpdateLocation.bind(this)}
+          value={this.state.location}
+          type="text" />
+          </div>
+          <div>
+          <button type="submit">Get Weather</button>
+          </div>
+          </form>
+        </section>
+
+        <section className='weather-container'>
+          <div>{data}</div>
+        </section>
       </section>
     )
-
-      }
+  }
 }
   //   let forecast;
   //   if (this.state.data.length) {
