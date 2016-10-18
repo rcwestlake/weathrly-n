@@ -85,14 +85,16 @@ class WeatherDisplay extends React.Component {
       // alert = DisplayAlert({ weather, index })
     }
     return (
-      <section>
+      <section className='app-container'>
         <section className='header'>
-          <div className='title'>weathr<span className='weathr-ly'>ly</span></div>
+          <div className='logo'>
+            <p className='title'>weathr<span className='weathr-ly'>ly</span></p>
+          </div>
           <p>{this.state.locationHeader}</p>
           <form onSubmit={this.locationAccepted.bind(this)}>
             <div className="form-group">
               <input
-              className="form-control"
+              className="form-input"
               placeholder="Enter city"
               onChange={this.handleUpdateLocation.bind(this)}
               value={this.state.location}
@@ -109,6 +111,13 @@ class WeatherDisplay extends React.Component {
             {data}
           </div>
         </section>
+
+        <footer>
+          <section className='footer-container'>
+            <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n'>Ryan W</a></small>
+          </section>
+          <img className='small-logo' src='../design/cloudy-night.png' />
+        </footer>
       </section>
     )
   }

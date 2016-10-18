@@ -1,3 +1,79 @@
 @import './reset';
 @import './variables';
 @import './mixins';
+
+
+body {
+  box-sizing: border-box;
+  color: $text-blue;
+  font-family: $muli;
+}
+
+.app-container {
+  height: $main-height;
+  width: $main-width;
+
+  .header {
+    height: 400px;
+    width: $main-width;
+    text-align: center;
+  }
+
+  .logo {
+    display: inline-block;
+    background: url('../design/design-logo.png') no-repeat;
+    height: 240px;
+    width: 230px;
+    margin: 15px 0px;
+    position: relative;
+  }
+
+  .form-group {
+    display: inline-block;
+    width: $main-width - 40;
+
+    .form-input {
+      border: none;
+      border-bottom: 3px solid $text-blue;
+      font-size: 50px;
+      width: $standard-px-width * 5;
+    }
+  }
+
+  .title {
+    position: absolute;
+    bottom: 0px;
+    left: 33%;
+    font-size: 21px;
+
+    .weathr-ly {
+      color: $primary-yellow;
+    }
+
+  }
+}
+
+
+footer {
+  height: 90px;
+  width: $main-width;
+
+
+  .footer-container {
+    height: 20px;
+    width: $main-width;
+  }
+
+  small {
+    float: right;
+    display: block;
+    font-size: 12px;
+  }
+
+  .small-logo {
+    float: right;
+    display: block;
+    height: 50px;
+    width: 50px;
+ }
+}

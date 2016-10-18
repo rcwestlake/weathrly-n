@@ -1,11 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400');
 
 // fonts
+$muli: Muli, sans-serif;
 
 //layouts
+$main-width: 100%;
+$main-height: 100%;
+$standard-px-height: 100px;
+$standard-px-width: 100px;
 
+$display-auto: auto;
+$text-center: center;
+
+$small-margin: 10px;
+$mid-margin: 30px;
 
 // colors
-
+$text-blue: #2F3C4F;
+$royal-blue: #3474D0;
 $primary-red: red;
+$primary-yellow: #FFEC65;
 
-// other 
+// other
