@@ -92,7 +92,8 @@ input {
 }
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
-  border: 1px solid red;
+  border: $input-border $royal-blue;
+  border-radius: 10%;
   display: inline-block;
   height: 200px;
   width: 200px;
@@ -100,11 +101,34 @@ input {
   margin-bottom: 50px;
   text-align: center;
 
-  .icon {
+  .sunny {
+    @include icon-size;
+    background: url('../design/sunny.png') no-repeat;
+  }
+
+  .cloudy {
+    @include icon-size;
+    background: url('../design/partly-cloudy.png') no-repeat;
+  }
+
+  .rain {
+    @include icon-size;
+    background: url('../design/rain.png') no-repeat;
+  }
+
+  .windy {
+    @include icon-size;
+    background: url('../design/wind.png') no-repeat;
+  }
+
+  .snow {
+    @include icon-size;
     background: url('../design/snow.png') no-repeat;
-    height: 42px;
-    width: 53px;
-    margin: auto;
+  }
+
+  .foggy {
+    @include icon-size;
+    background: url('../design/foggy.png') no-repeat;
   }
 
   .day {
@@ -112,12 +136,21 @@ input {
     margin: 15px;
   }
 
+  .temp {
+    margin-bottom: 12px;
+  }
+
+  .alert {
+    color: $primary-red;
+  }
+
 
 }
 
 .Today {
+  border: $input-border $primary-yellow;
+  border-radius: 10%;
   display: block;
-  background-color: yellow;
   margin: 50px $display-auto;
 }
 

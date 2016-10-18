@@ -13,3 +13,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin icon-size {
+  height: 48px;
+  width: 56px;
+  margin: auto;
+}
