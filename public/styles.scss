@@ -138,6 +138,14 @@ input {
 
   .temp {
     margin-bottom: 12px;
+
+    .high {
+      font-weight: bold;
+    }
+  }
+
+  .precip {
+    margin-bottom: 12px;
   }
 
   .alert {
