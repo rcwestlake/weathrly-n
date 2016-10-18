@@ -81,7 +81,7 @@ input {
 
   .google-btn {
     @include button;
-    background: $green;
+    background: darken($green, 10%);
 
   }
 }
@@ -150,6 +150,7 @@ input {
 
   .alert {
     color: $primary-red;
+    font-weight: bold;
   }
 
 

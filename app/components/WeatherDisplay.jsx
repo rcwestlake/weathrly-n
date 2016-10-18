@@ -90,20 +90,21 @@ class WeatherDisplay extends React.Component {
       <section className='app-container'>
         <section className='header'>
           <section className='built-container'>
-          <img className='small-logo' src='../design/cloudy-night.png' />
+          <img className='small-logo' src='../design/cloudy-night.png' alt='icon which displays the weather type'/>
             <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n'>Ryan W</a></small>
           </section>
           <div className='logo'>
             <p className='title'>weathr<span className='weathr-ly'>ly</span></p>
           </div>
           <form onSubmit={this.locationAccepted.bind(this)}>
-            <div className="form-group">
+            <div className="form-group" aria-label='form'>
               <input
               className="form-input"
               placeholder="Enter city"
               onChange={this.handleUpdateLocation.bind(this)}
               value={this.state.location}
-              type="text" />
+              type="text"
+              aria-label='input'/>
               <button type="submit" className='submit'>Get Weather</button>
               <a href='https://www.wunderground.com/' target='_blank'><button type="button" className='google-btn'> WeatherU</button></a>
             </div>
