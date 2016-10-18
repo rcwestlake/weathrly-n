@@ -37,7 +37,7 @@ class WeatherDisplay extends React.Component {
       this.apiRequest = $.get(this.state.source + locationFormatted, function(result){
         this.setState({
           data: result,
-          locationTitle: capitalizeEachWord(locationFormatted)
+          locationTitle: 'Location: ' + capitalizeEachWord(locationFormatted)
         })
         console.log('first log: ', this.state.data);
         var weatherInfo = this.state.data;
@@ -105,7 +105,7 @@ class WeatherDisplay extends React.Component {
             </div>
             <p className='error'>{this.state.locationHeader}</p>
           </form>
-          <h4 className='location-header'>{this.state.locationTitle}</h4>
+          <h4 className='location-header'> {this.state.locationTitle}</h4>
         </section>
 
         <section className='weather-container' className={this.state.location}>
