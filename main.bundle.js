@@ -23329,16 +23329,18 @@
 	      e.preventDefault();
 
 	      var locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
-	      debugger;
 
 	      if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' || locationFormatted === 'castle-rock') {
 
 	        this.apiRequest = $.get(this.state.source + locationFormatted, function (result) {
+	          var _this2 = this;
+
 	          this.setState({
 	            data: result,
 	            locationTitle: 'Location: ' + capitalizeEachWord(locationFormatted)
-	          });
-	          console.log('first log: ', this.state.data);
+	          }, function () {
+	            _this2.storeData();
+	          }), console.log('first log: ', this.state.data);
 	          var weatherInfo = this.state.data;
 	        }.bind(this));
 
@@ -23352,15 +23354,23 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var retrievedLocation = JSON.parse(localStorage.getItem('location'));
+	      var retrievedLocation = JSON.parse(localStorage.getItem('stored'));
+	      DisplayWeather(retrievedLocation.forecast);
 	      this.setState({
 	        location: ''
 	      });
 	    }
 	  }, {
+	    key: 'storeData',
+	    value: function storeData() {
+	      var storeData = {
+	        forecast: this.state.data
+	      };
+	      localStorage.setItem('stored', JSON.stringify(storeData));
+	    }
+	  }, {
 	    key: 'handleUpdateLocation',
 	    value: function handleUpdateLocation(e) {
-	      var storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location));
 	      this.setState({
 	        location: e.target.value
 	      });
@@ -23484,7 +23494,6 @@
 	}(React.Component);
 
 	function DisplayWeather(weatherData) {
-	  debugger;
 	  var i = 0;
 	  var weather = weatherData;
 	  var summaryArray = [];
@@ -23540,7 +23549,6 @@
 	}
 
 	function DisplayAlert(weather, index) {
-	  debugger;
 	  if (weather[index].weatherType.scale > 2) {
 	    return React.createElement(
 	      'span',

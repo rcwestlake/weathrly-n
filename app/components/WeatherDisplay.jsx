@@ -119,9 +119,7 @@ class WeatherDisplay extends React.Component {
         </section>
 
         <section className='weather-container'>
-          <div>
             {data}
-          </div>
         </section>
       </section>
     )

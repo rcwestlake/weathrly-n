@@ -11,14 +11,14 @@
 
 @mixin flex {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: wrap;;
   justify-content: center;
   align-items: center;
 }
 
 @mixin icon-size {
-  height: 48px;
-  width: 56px;
+  height: 150px;
+  width: 160px;
   margin: auto;
 }

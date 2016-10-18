@@ -87,21 +87,21 @@ input {
 }
 
 .weather-container {
-  background-color: lighten($royal-blue, 25%);
   @include flex;
   margin-top: 50px;
   width: $main-width;
 }
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
-  border: $input-border $royal-blue;
-  border-radius: 10%;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  height: 330px;
+  width: $main-width;
   margin-left: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   text-align: center;
+  width: $main-width - 40;
 
   .sunny {
     @include icon-size;
@@ -133,6 +133,11 @@ input {
     background: url('../design/foggy.png') no-repeat;
   }
 
+  .thunder-storms {
+    @include icon-size;
+    background: url('../design/thunder.png') no-repeat;
+  }
+
   .day {
     font-size: $standard-size - 5;
     font-weight: bold;
@@ -160,14 +165,13 @@ input {
     font-weight: bold;
   }
 
-
+  .Today {
+    border-bottom: $input-border $primary-yellow;
+  }
 }
 
-.Today {
-  border: $input-border $primary-yellow;
-  border-radius: 10%;
-  display: block;
-  margin: 50px $display-auto;
+.Today, .Tuesday, .Thursday, .Saturday, {
+  background-color: $royal-blue;
 }
 
 
