@@ -44,7 +44,7 @@ class WeatherDisplay extends React.Component {
 
     } else {
       this.setState({
-        locationHeader: 'Please enter a valid city' //or link to Google or weatherunderground
+        locationHeader: 'Please enter a valid city'
       })
     }
   }
