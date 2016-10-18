@@ -93,8 +93,6 @@ input {
 }
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
-  justify-content: center;
-  align-items: center;
   display: block;
   height: 330px;
   width: $main-width;
@@ -139,17 +137,17 @@ input {
   }
 
   .day {
-    font-size: $standard-size - 5;
+    font-size: $standard-size;
     font-weight: bold;
     margin: 15px;
   }
 
   .type {
-    font-size: 17px;
+    font-size: 20px;
   }
 
   .temp {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
     .high {
       font-weight: bold;
@@ -157,7 +155,7 @@ input {
   }
 
   .precip {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
   }
 
   .alert {
