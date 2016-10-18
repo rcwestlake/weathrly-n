@@ -108,16 +108,20 @@ class WeatherDisplay extends React.Component {
 
 function DisplayWeather(weatherData) {
   debugger;
+  let i = 0;
   let weather = weatherData;
   let summaryArray = [];
-  for (let i = 0; i < weather.length; i++) {
+
+  weather.forEach((item) => {
     summaryArray.push(<ul key={i}>
                         <li>{weather[i].date}</li>
                         <li>High: {weather[i].temp.high}*</li>
                         <li>Low: {weather[i].temp.high}*</li>
                         <li>{weather[i].weatherType.chance * 100}% Change of Precip</li>
                       </ul>)
-  }
+  debugger;
+  i++;
+  })
   return summaryArray;
 }
 
