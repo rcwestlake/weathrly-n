@@ -30,7 +30,6 @@ class WeatherDisplay extends React.Component {
     e.preventDefault();
 
     let locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
-    debugger;
 
     if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' ||locationFormatted === 'castle-rock') {
 
@@ -53,7 +52,6 @@ class WeatherDisplay extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     let retrievedLocation = JSON.parse(localStorage.getItem('stored'));
     DisplayWeather(retrievedLocation.forecast);
     this.setState({
@@ -133,7 +131,6 @@ class WeatherDisplay extends React.Component {
 
 
 function DisplayWeather(weatherData) {
-  debugger;
   let i = 0;
   let weather = weatherData;
   let summaryArray = [];
@@ -152,7 +149,6 @@ function DisplayWeather(weatherData) {
 }
 
 function DisplayAlert(weather, index) {
-  debugger;
   if (weather[index].weatherType.scale > 2) {
     return (
       <span className='alert'>Severe weather expected. Stay safe.</span>
