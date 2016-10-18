@@ -133,7 +133,7 @@ function DisplayWeather(weatherData) {
   weather.forEach((item) => {
     summaryArray.push(<article className={dayMap[i]} key={i}>
                         <p className={weather[i].weatherType.type}></p>
-                        <h3 className='day'>{dayMap[i]} - {capitalizeEachWord(weather[i].weatherType.type)}</h3>
+                        <h3 className='day'>{dayMap[i]} / <span className='type'>{capitalizeEachWord(weather[i].weatherType.type)}</span></h3>
                         <h5 className='temp'><span className='high'>{weather[i].temp.high}&deg;</span> | <span className='low'>{weather[i].temp.low}&deg;</span></h5>
                         <h6 className='precip'>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
                         <p className='alert'>{DisplayAlert(weather, i)}</p>
