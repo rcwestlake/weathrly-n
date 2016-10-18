@@ -28,7 +28,7 @@ class WeatherDisplay extends React.Component {
   locationAccepted(e) {
     e.preventDefault();
 
-    let locationFormatted = this.state.location.replace(' ', '-').toLowerCase();
+    let locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
 
     if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' ||locationFormatted === 'castle-rock') {
 
