@@ -30,7 +30,6 @@ class WeatherDisplay extends React.Component {
     e.preventDefault();
 
     let locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
-    debugger;
 
     if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' ||locationFormatted === 'castle-rock') {
 
@@ -38,7 +37,7 @@ class WeatherDisplay extends React.Component {
         this.setState({
           data: result,
           locationTitle: 'Location: ' + capitalizeEachWord(locationFormatted)
-        })
+        }, () => {this.storeData()}),
         console.log('first log: ', this.state.data);
         var weatherInfo = this.state.data;
       }.bind(this));
@@ -53,14 +52,21 @@ class WeatherDisplay extends React.Component {
   }
 
   componentDidMount() {
-    let retrievedLocation = JSON.parse(localStorage.getItem('location'))
+    let retrievedLocation = JSON.parse(localStorage.getItem('stored'));
+    DisplayWeather(retrievedLocation.forecast);
     this.setState({
       location: ''
     })
   }
 
+  storeData() {
+    var storeData = {
+      forecast: this.state.data
+    }
+    localStorage.setItem('stored', JSON.stringify(storeData))
+  }
+
   handleUpdateLocation(e) {
-    let storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location))
     this.setState({
       location: (e.target.value)
     })
@@ -113,9 +119,7 @@ class WeatherDisplay extends React.Component {
         </section>
 
         <section className='weather-container'>
-          <div>
             {data}
-          </div>
         </section>
       </section>
     )
@@ -125,14 +129,13 @@ class WeatherDisplay extends React.Component {
 
 
 function DisplayWeather(weatherData) {
-  debugger;
   let i = 0;
   let weather = weatherData;
   let summaryArray = [];
 
   weather.forEach((item) => {
     summaryArray.push(<article className={dayMap[i]} key={i}>
-                        <p className={weather[i].weatherType.type}></p>
+                        <p className={weather[i].weatherType.type.replace(' ', '-')}></p>
                         <h3 className='day'>{dayMap[i]} / <span className='type'>{capitalizeEachWord(weather[i].weatherType.type)}</span></h3>
                         <h5 className='temp'><span className='high'>{weather[i].temp.high}&deg;</span> | <span className='low'>{weather[i].temp.low}&deg;</span></h5>
                         <h6 className='precip'>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
@@ -144,7 +147,6 @@ function DisplayWeather(weatherData) {
 }
 
 function DisplayAlert(weather, index) {
-  debugger;
   if (weather[index].weatherType.scale > 2) {
     return (
       <span className='alert'>Severe weather expected. Stay safe.</span>
