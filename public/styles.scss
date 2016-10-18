@@ -25,13 +25,13 @@ input {
 .header {
   height: 400px;
   width: $main-width;
+  text-align: center;
 
   .logo {
-    float: left;
     background: url('../design/design-logo.png') no-repeat;
     height: 240px;
     width: 230px;
-    margin: 15px 0px;
+    margin: 15px $display-auto;
     position: relative;
 
     .title {
@@ -45,18 +45,31 @@ input {
       }
     }
   }
+
+  .location-header-container {
+    margin: 60px;
+
+    .location-header {
+      border-bottom: $input-border $primary-yellow;
+      font-size: $standard-size;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+  }
+
 }
 
 .form-group {
-  display: inline-block;
+  margin-bottom: 15px;
   margin-left: 50px;
-  margin-top: 105px;
-  width: $main-width - 30;
+  width: $main-width;
 
   .form-input {
     border: none;
     border-bottom: $input-border $text-blue;
-    font-size: 50px;
+    font-size: 35px;
+    margin: 0 $display-auto;
     padding-left: 10px;
     width: $standard-px-width * 5;
   }
@@ -68,46 +81,104 @@ input {
 
   .google-btn {
     @include button;
-    background: $green;
+    background: darken($green, 10%);
 
   }
 }
 
+.weather-container {
+  background-color: lighten($royal-blue, 25%);
+  @include flex;
+  margin-top: 50px;
+  width: $main-width;
+}
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
-  border: 1px solid red;
+  border: $input-border $royal-blue;
+  border-radius: 10%;
   display: inline-block;
   height: 200px;
   width: 200px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  .sunny {
+    @include icon-size;
+    background: url('../design/sunny.png') no-repeat;
+  }
+
+  .cloudy {
+    @include icon-size;
+    background: url('../design/partly-cloudy.png') no-repeat;
+  }
+
+  .rain {
+    @include icon-size;
+    background: url('../design/rain.png') no-repeat;
+  }
+
+  .windy {
+    @include icon-size;
+    background: url('../design/wind.png') no-repeat;
+  }
+
+  .snow {
+    @include icon-size;
+    background: url('../design/snow.png') no-repeat;
+  }
+
+  .foggy {
+    @include icon-size;
+    background: url('../design/foggy.png') no-repeat;
+  }
+
+  .day {
+    font-size: $standard-size - 5;
+    font-weight: bold;
+    margin: 15px;
+  }
+
+  .type {
+    font-size: 17px;
+  }
+
+  .temp {
+    margin-bottom: 12px;
+
+    .high {
+      font-weight: bold;
+    }
+  }
+
+  .precip {
+    margin-bottom: 12px;
+  }
+
+  .alert {
+    color: $primary-red;
+    font-weight: bold;
+  }
+
+
 }
 
 .Today {
+  border: $input-border $primary-yellow;
+  border-radius: 10%;
   display: block;
-  background-color: yellow;
   margin: 50px $display-auto;
 }
 
 
-footer {
-  height: 90px;
+.built-container {
   width: $main-width;
 
-
-  .footer-container {
-    width: $main-width;
-
-
-    small {
-      display: block;
-      float: right;
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
-  }
-
-  .small-logo {
-    margin-top: 30px;
+  small {
     display: block;
     float: right;
+    margin: 10px 15px;
+    font-size: 12px;
   }
- }
+
+}

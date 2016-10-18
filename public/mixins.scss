@@ -3,6 +3,22 @@
   border-radius: 2px;
   color: $white;
   height: 44px;
+  font-weight: bold;
   margin-left: 5px;
   width: 90px;
+}
+
+
+@mixin flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin icon-size {
+  height: 48px;
+  width: 56px;
+  margin: auto;
 }
