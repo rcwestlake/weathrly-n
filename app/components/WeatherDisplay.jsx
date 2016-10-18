@@ -13,39 +13,21 @@ class WeatherDisplay extends React.Component {
     }
   }
 
-  getData(location) {
-    debugger;
-     var data = $.get(this.state.source + location, function(result){
-       this.setState({
-         data: [result]
-       })
-       console.log(this.state.data);
-     }.bind(this));
-  }
+  locationAccepted(e) {
+    e.preventDefault();
 
-  handleSubmitLocation(location) {
-    var data = this.getData(location);
-    this.setState({
-      location: '',
-      data: data
-    })
-  }
+    let locationFormatted = this.state.location.replace(' ', '-').toLowerCase();
 
-  render() {
-    return (
-      <div>
-        <InputField handleSubmit={this.handleSubmitLocation.bind(this)}/>
-      </div>
-    )
-  }
+    if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' ||locationFormatted === 'castle-rock') {
 
-}
+      this.apiRequest = $.get(this.state.source + locationFormatted, function(result){
+        this.setState({
+          data: result
+        })
+        console.log('first log: ', this.state.data);
+      }.bind(this));
 
-class InputField extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      location: ''
+    } else {
     }
   }
 
@@ -65,7 +47,8 @@ class InputField extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitHandled.bind(this)}>
+      <section>
+      <form onSubmit={this.locationAccepted.bind(this)}>
         <div className="form-group">
         <input
         className="form-control"
@@ -78,12 +61,21 @@ class InputField extends React.Component {
         <button type="submit">Get Weather</button>
         </div>
       </form>
+      </section>
     )
-  }
-  }
 
-  class DisplayWeather extends React.Component {
-
-  }
+      }
+}
+  //   let forecast;
+  //   if (this.state.data.length) {
+  //     forecast = <DisplayWeather data={forecast} />
+  //   }
+  //   return (
+  //     <div>
+  //       <InputField handleSubmit={this.handleSubmitLocation.bind(this)}/>
+  //       {forecast}
+  //     </div>
+  //   )
+  // }
 
   module.exports = WeatherDisplay;
