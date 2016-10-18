@@ -99,9 +99,7 @@ class WeatherDisplay extends React.Component {
               onChange={this.handleUpdateLocation.bind(this)}
               value={this.state.location}
               type="text" />
-              </div>
-            <div>
-              <button type="submit">Get Weather</button>
+              <button type="submit" className='submit'>Get Weather</button>
             </div>
           </form>
         </section>

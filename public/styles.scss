@@ -9,6 +9,10 @@ body {
   font-family: $muli;
 }
 
+button {
+  cursor: pointer;
+}
+
 .app-container {
   height: $main-height;
   width: $main-width;
@@ -30,13 +34,23 @@ body {
 
   .form-group {
     display: inline-block;
-    width: $main-width - 40;
+    width: $main-width - 30;
 
     .form-input {
       border: none;
-      border-bottom: 3px solid $text-blue;
+      border-bottom: $input-border $text-blue;
       font-size: 50px;
       width: $standard-px-width * 5;
+    }
+
+    .submit {
+      background: $royal-blue;
+      border: $display-none;
+      border-radius: 2px;
+      color: $white;
+      height: 44px;
+      margin-left: 5px;
+      width: 90px;
     }
   }
 
@@ -60,20 +74,20 @@ footer {
 
 
   .footer-container {
-    height: 20px;
     width: $main-width;
-  }
 
-  small {
-    float: right;
-    display: block;
-    font-size: 12px;
+
+    small {
+      display: block;
+      float: right;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
   }
 
   .small-logo {
-    float: right;
+    margin-top: 30px;
     display: block;
-    height: 50px;
-    width: 50px;
+    float: right;
+  }
  }
-}
