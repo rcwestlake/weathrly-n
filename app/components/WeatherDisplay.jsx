@@ -4,13 +4,13 @@ const $ = require('jquery');
 
 let dayMap = {
   '0' : 'Today',
-  '1' : 'Mon',
-  '2' : 'Tue',
-  '3' : 'Wed',
-  '4' : 'Thu',
-  '5' : 'Fri',
-  '6' : 'Sat',
-  '7' : 'Sun'
+  '1' : 'Monday',
+  '2' : 'Tuesday',
+  '3' : 'Wednesday',
+  '4' : 'Thursday',
+  '5' : 'Friday',
+  '6' : 'Saturday',
+  '7' : 'Sunday'
 }
 
 class WeatherDisplay extends React.Component {
@@ -82,7 +82,6 @@ class WeatherDisplay extends React.Component {
     let data;
     if (this.state.data.length) {
       data = DisplayWeather(this.state.data)
-      // alert = DisplayAlert({ weather, index })
     }
     return (
       <section className='app-container'>
@@ -100,6 +99,7 @@ class WeatherDisplay extends React.Component {
               value={this.state.location}
               type="text" />
               <button type="submit" className='submit'>Get Weather</button>
+              <a href='https://www.wunderground.com/' target='_blank'><button type="button" className='google-btn'> WeatherU</button></a>
             </div>
           </form>
         </section>
@@ -130,7 +130,7 @@ function DisplayWeather(weatherData) {
   let summaryArray = [];
 
   weather.forEach((item) => {
-    summaryArray.push(<article key={i}>
+    summaryArray.push(<article className={dayMap[i]} key={i}>
                         <h3>{dayMap[i]} - {capitalizeEachWord(weather[i].weatherType.type)}</h3>
                         <h5 className='temp'><span className='high'>{weather[i].temp.high}&deg;</span> | <span className='low'>{weather[i].temp.low}&deg;</span></h5>
                         <h6 className='precip'>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
