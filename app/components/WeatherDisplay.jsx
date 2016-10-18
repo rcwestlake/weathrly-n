@@ -90,8 +90,7 @@ class WeatherDisplay extends React.Component {
       <section className='app-container'>
         <section className='header'>
           <section className='built-container'>
-          <img className='small-logo' src='../design/cloudy-night.png' alt='icon which displays the weather type'/>
-            <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n'>Ryan W</a></small>
+            <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n' target='_blank'>Ryan W</a></small>
           </section>
           <div className='logo'>
             <p className='title'>weathr<span className='weathr-ly'>ly</span></p>
