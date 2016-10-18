@@ -138,7 +138,7 @@ function DisplayWeather(weatherData) {
                       </article>)
   i++;
   })
-  return summaryArray;
+  return summaryArray.slice(0, 7);
 }
 
 function DisplayAlert(weather, index) {
