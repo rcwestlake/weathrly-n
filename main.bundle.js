@@ -89,6 +89,8 @@
 
 	ReactDOM.render(React.createElement(App, null), document.querySelector('.app'));
 
+	module.exports = App;
+
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {

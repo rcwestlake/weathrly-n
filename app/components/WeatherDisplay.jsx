@@ -38,7 +38,7 @@ class WeatherDisplay extends React.Component {
         this.setState({
           data: result,
           locationTitle: 'Location: ' + capitalizeEachWord(locationFormatted)
-        })
+        }, () => {this.storeData()}),
         console.log('first log: ', this.state.data);
         var weatherInfo = this.state.data;
       }.bind(this));
@@ -53,14 +53,22 @@ class WeatherDisplay extends React.Component {
   }
 
   componentDidMount() {
-    let retrievedLocation = JSON.parse(localStorage.getItem('location'))
+    debugger;
+    let retrievedLocation = JSON.parse(localStorage.getItem('stored'));
+    DisplayWeather(retrievedLocation.forecast);
     this.setState({
       location: ''
     })
   }
 
+  storeData() {
+    var storeData = {
+      forecast: this.state.data
+    }
+    localStorage.setItem('stored', JSON.stringify(storeData))
+  }
+
   handleUpdateLocation(e) {
-    let storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location))
     this.setState({
       location: (e.target.value)
     })
