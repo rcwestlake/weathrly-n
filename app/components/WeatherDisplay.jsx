@@ -47,7 +47,7 @@ class WeatherDisplay extends React.Component {
 
     } else {
       this.setState({
-        locationHeader: 'Please enter a valid city or click WeatherU to visit WeatherUnderground'
+        locationHeader: 'Please enter a valid city (Denver San Diego, San Fransico, Castle Rock) or click WeatherU to visit WeatherUnderground'
       })
     }
   }

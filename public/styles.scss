@@ -50,7 +50,7 @@ input {
     margin: 60px;
 
     .location-header {
-      border: $input-border $primary-yellow;
+      border-bottom: $input-border $primary-yellow;
       font-size: $standard-size;
       font-weight: bold;
       padding: 8px;
