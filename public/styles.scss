@@ -25,13 +25,13 @@ input {
 .header {
   height: 400px;
   width: $main-width;
+  text-align: center;
 
   .logo {
-    float: left;
     background: url('../design/design-logo.png') no-repeat;
     height: 240px;
     width: 230px;
-    margin: 15px 0px;
+    margin: 15px $display-auto;
     position: relative;
 
     .title {
@@ -53,15 +53,15 @@ input {
 }
 
 .form-group {
-  display: inline-block;
+  margin-bottom: 15px;
   margin-left: 50px;
-  margin-top: 105px;
-  width: $main-width - 30;
+  width: $main-width;
 
   .form-input {
     border: none;
     border-bottom: $input-border $text-blue;
-    font-size: 50px;
+    font-size: 35px;
+    margin: 0 $display-auto;
     padding-left: 10px;
     width: $standard-px-width * 5;
   }
