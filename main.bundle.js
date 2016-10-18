@@ -49,13 +49,6 @@
 	__webpack_require__(1);
 	__webpack_require__(176);
 
-	//components need for app
-	//app
-	//input field and button - changes state
-	//current time summary
-	//list item
-	//week summary
-
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -23303,13 +23296,13 @@
 
 	var dayMap = {
 	  '0': 'Today',
-	  '1': 'Mon',
-	  '2': 'Tue',
-	  '3': 'Wed',
-	  '4': 'Thu',
-	  '5': 'Fri',
-	  '6': 'Sat',
-	  '7': 'Sun'
+	  '1': 'Monday',
+	  '2': 'Tuesday',
+	  '3': 'Wednesday',
+	  '4': 'Thursday',
+	  '5': 'Friday',
+	  '6': 'Saturday',
+	  '7': 'Sunday'
 	};
 
 	var WeatherDisplay = function (_React$Component) {
@@ -23334,7 +23327,7 @@
 	    value: function locationAccepted(e) {
 	      e.preventDefault();
 
-	      var locationFormatted = this.state.location.replace(' ', '-').toLowerCase();
+	      var locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
 
 	      if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' || locationFormatted === 'castle-rock') {
 
@@ -23349,7 +23342,7 @@
 	        this.resetLocation();
 	      } else {
 	        this.setState({
-	          locationHeader: 'Please enter a valid city' //or link to Google or weatherunderground
+	          locationHeader: 'Please enter a valid city'
 	        });
 	      }
 	    }
@@ -23392,22 +23385,25 @@
 	      var data = void 0;
 	      if (this.state.data.length) {
 	        data = DisplayWeather(this.state.data);
-	        // alert = DisplayAlert({ weather, index })
 	      }
 	      return React.createElement(
 	        'section',
-	        null,
+	        { className: 'app-container' },
 	        React.createElement(
 	          'section',
 	          { className: 'header' },
 	          React.createElement(
 	            'div',
-	            { className: 'title' },
-	            'weathr',
+	            { className: 'logo' },
 	            React.createElement(
-	              'span',
-	              { className: 'weathr-ly' },
-	              'ly'
+	              'p',
+	              { className: 'title' },
+	              'weathr',
+	              React.createElement(
+	                'span',
+	                { className: 'weathr-ly' },
+	                'ly'
+	              )
 	            )
 	          ),
 	          React.createElement(
@@ -23422,19 +23418,24 @@
 	              'div',
 	              { className: 'form-group' },
 	              React.createElement('input', {
-	                className: 'form-control',
+	                className: 'form-input',
 	                placeholder: 'Enter city',
 	                onChange: this.handleUpdateLocation.bind(this),
 	                value: this.state.location,
-	                type: 'text' })
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
+	                type: 'text' }),
 	              React.createElement(
 	                'button',
-	                { type: 'submit' },
+	                { type: 'submit', className: 'submit' },
 	                'Get Weather'
+	              ),
+	              React.createElement(
+	                'a',
+	                { href: 'https://www.wunderground.com/', target: '_blank' },
+	                React.createElement(
+	                  'button',
+	                  { type: 'button', className: 'google-btn' },
+	                  ' WeatherU'
+	                )
 	              )
 	            )
 	          )
@@ -23447,6 +23448,25 @@
 	            null,
 	            data
 	          )
+	        ),
+	        React.createElement(
+	          'footer',
+	          null,
+	          React.createElement(
+	            'section',
+	            { className: 'footer-container' },
+	            React.createElement(
+	              'small',
+	              null,
+	              'Built By: ',
+	              React.createElement(
+	                'a',
+	                { href: 'https://github.com/rcwestlake/weathrly-n' },
+	                'Ryan W'
+	              )
+	            )
+	          ),
+	          React.createElement('img', { className: 'small-logo', src: '../design/cloudy-night.png' })
 	        )
 	      );
 	    }
@@ -23464,29 +23484,34 @@
 	  weather.forEach(function (item) {
 	    summaryArray.push(React.createElement(
 	      'article',
-	      { key: i },
+	      { className: dayMap[i], key: i },
 	      React.createElement(
 	        'h3',
 	        null,
-	        dayMap[i]
+	        dayMap[i],
+	        ' - ',
+	        capitalizeEachWord(weather[i].weatherType.type)
 	      ),
 	      React.createElement(
 	        'h5',
-	        null,
-	        'High: ',
-	        weather[i].temp.high,
-	        '\xB0'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'Low: ',
-	        weather[i].temp.high,
-	        '\xB0'
+	        { className: 'temp' },
+	        React.createElement(
+	          'span',
+	          { className: 'high' },
+	          weather[i].temp.high,
+	          '\xB0'
+	        ),
+	        ' | ',
+	        React.createElement(
+	          'span',
+	          { className: 'low' },
+	          weather[i].temp.low,
+	          '\xB0'
+	        )
 	      ),
 	      React.createElement(
 	        'h6',
-	        null,
+	        { className: 'precip' },
 	        Math.floor(weather[i].weatherType.chance * 100),
 	        '% Chance of Precip'
 	      ),
@@ -23512,6 +23537,12 @@
 	  }
 	}
 
+	function capitalizeEachWord(str) {
+	  return str.replace(/\w\S*/g, function (txt) {
+	    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	  });
+	}
+
 	module.exports = WeatherDisplay;
 
 /***/ },
@@ -23524,7 +23555,7 @@
 	var content = __webpack_require__(177);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(179)(content, {});
+	var update = __webpack_require__(180)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -23546,10 +23577,10 @@
 
 	exports = module.exports = __webpack_require__(178)();
 	// imports
-
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Muli:300,400);", ""]);
 
 	// module
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nbody {\n  box-sizing: border-box;\n  color: #2F3C4F;\n  font-family: Muli, sans-serif; }\n\nbutton {\n  cursor: pointer; }\n\ninput {\n  box-sizing: border-box; }\n\n.app-container {\n  height: 100%;\n  width: 100%; }\n\n.header {\n  height: 400px;\n  width: 100%; }\n  .header .logo {\n    float: left;\n    background: url(" + __webpack_require__(179) + ") no-repeat;\n    height: 240px;\n    width: 230px;\n    margin: 15px 0px;\n    position: relative; }\n    .header .logo .title {\n      position: absolute;\n      bottom: 0px;\n      left: 33%;\n      font-size: 21px; }\n      .header .logo .title .weathr-ly {\n        color: #FFEC65; }\n\n.form-group {\n  display: inline-block;\n  margin-left: 50px;\n  margin-top: 105px;\n  width: 70%; }\n  .form-group .form-input {\n    border: none;\n    border-bottom: 3px solid #2F3C4F;\n    font-size: 50px;\n    padding-left: 10px;\n    width: 500px; }\n  .form-group .submit {\n    border: none;\n    border-radius: 2px;\n    color: #ffffff;\n    height: 44px;\n    margin-left: 5px;\n    width: 90px;\n    background: #3474D0; }\n  .form-group .google-btn {\n    border: none;\n    border-radius: 2px;\n    color: #ffffff;\n    height: 44px;\n    margin-left: 5px;\n    width: 90px;\n    background: #25A55F; }\n\n.Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {\n  border: 1px solid red;\n  display: inline-block;\n  height: 200px;\n  width: 200px; }\n\n.Today {\n  display: block;\n  background-color: yellow;\n  margin: 50px auto; }\n\nfooter {\n  height: 90px;\n  width: 100%; }\n  footer .footer-container {\n    width: 100%; }\n    footer .footer-container small {\n      display: block;\n      float: right;\n      margin-bottom: 10px;\n      font-size: 12px; }\n  footer .small-logo {\n    margin-top: 30px;\n    display: block;\n    float: right; }\n", ""]);
 
 	// exports
 
@@ -23612,6 +23643,12 @@
 
 /***/ },
 /* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "88c1c951ed561b74b30deac4e4789d2c.png";
+
+/***/ },
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
