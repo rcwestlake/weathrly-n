@@ -1,3 +1,113 @@
 @import './reset';
 @import './variables';
 @import './mixins';
+
+
+body {
+  box-sizing: border-box;
+  color: $text-blue;
+  font-family: $muli;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  box-sizing: border-box;
+}
+
+.app-container {
+  height: $main-height;
+  width: $main-width;
+}
+
+.header {
+  height: 400px;
+  width: $main-width;
+
+  .logo {
+    float: left;
+    background: url('../design/design-logo.png') no-repeat;
+    height: 240px;
+    width: 230px;
+    margin: 15px 0px;
+    position: relative;
+
+    .title {
+      position: absolute;
+      bottom: 0px;
+      left: 33%;
+      font-size: 21px;
+
+      .weathr-ly {
+        color: $primary-yellow;
+      }
+    }
+  }
+}
+
+.form-group {
+  display: inline-block;
+  margin-left: 50px;
+  margin-top: 105px;
+  width: $main-width - 30;
+
+  .form-input {
+    border: none;
+    border-bottom: $input-border $text-blue;
+    font-size: 50px;
+    padding-left: 10px;
+    width: $standard-px-width * 5;
+  }
+
+  .submit {
+    @include button;
+    background: $royal-blue;
+  }
+
+  .google-btn {
+    @include button;
+    background: $green;
+
+  }
+}
+
+
+.Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
+  border: 1px solid red;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+.Today {
+  display: block;
+  background-color: yellow;
+  margin: 50px $display-auto;
+}
+
+
+footer {
+  height: 90px;
+  width: $main-width;
+
+
+  .footer-container {
+    width: $main-width;
+
+
+    small {
+      display: block;
+      float: right;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+  }
+
+  .small-logo {
+    margin-top: 30px;
+    display: block;
+    float: right;
+  }
+ }
