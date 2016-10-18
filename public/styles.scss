@@ -45,6 +45,11 @@ input {
       }
     }
   }
+
+  .weather-container {
+    font-size: 30px;
+    width: 150px;
+  }
 }
 
 .form-group {
@@ -72,6 +77,8 @@ input {
 
   }
 }
+
+
 
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {

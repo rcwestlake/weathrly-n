@@ -21,6 +21,7 @@ class WeatherDisplay extends React.Component {
       source: 'http://weatherly-api.herokuapp.com/api/weather/',
       location: '',
       locationHeader: '',
+      locationTitle: '',
       data: []
     }
   }
@@ -29,12 +30,14 @@ class WeatherDisplay extends React.Component {
     e.preventDefault();
 
     let locationFormatted = this.state.location.trim().replace(' ', '-').toLowerCase();
+    debugger;
 
     if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' ||locationFormatted === 'castle-rock') {
 
       this.apiRequest = $.get(this.state.source + locationFormatted, function(result){
         this.setState({
-          data: result
+          data: result,
+          locationTitle: capitalizeEachWord(locationFormatted)
         })
         console.log('first log: ', this.state.data);
         var weatherInfo = this.state.data;
@@ -89,7 +92,6 @@ class WeatherDisplay extends React.Component {
           <div className='logo'>
             <p className='title'>weathr<span className='weathr-ly'>ly</span></p>
           </div>
-          <p>{this.state.locationHeader}</p>
           <form onSubmit={this.locationAccepted.bind(this)}>
             <div className="form-group">
               <input
@@ -101,7 +103,9 @@ class WeatherDisplay extends React.Component {
               <button type="submit" className='submit'>Get Weather</button>
               <a href='https://www.wunderground.com/' target='_blank'><button type="button" className='google-btn'> WeatherU</button></a>
             </div>
+            <p className='error'>{this.state.locationHeader}</p>
           </form>
+          <h4 className='location-header'>{this.state.locationTitle}</h4>
         </section>
 
         <section className='weather-container' className={this.state.location}>
