@@ -25,7 +25,9 @@ class WeatherDisplay extends React.Component {
         this.setState({
           data: result
         })
+        debugger;
         console.log('first log: ', this.state.data);
+        var weatherInfo = this.state.data;
       }.bind(this));
 
       this.resetLocation()
@@ -39,10 +41,10 @@ class WeatherDisplay extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     let retrievedLocation = JSON.parse(localStorage.getItem('location'))
-    debugger;
-
+    this.setState({
+      location: ''
+    })
   }
 
   resetLocation() {
@@ -53,10 +55,10 @@ class WeatherDisplay extends React.Component {
   }
 
   handleUpdateLocation(e) {
+    let storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location))
     this.setState({
       location: (e.target.value)
     })
-    let storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location))
   }
 
   submitHandled(e) {
@@ -70,7 +72,7 @@ class WeatherDisplay extends React.Component {
   render() {
     let data;
     if (this.state.data.length) {
-      data = JSON.stringify(this.state.data)
+      data = DisplayWeather(this.state.data)
     }
     return (
       <section>
@@ -78,37 +80,45 @@ class WeatherDisplay extends React.Component {
           <div className='title'>weathr<span className='weathr-ly'>ly</span></div>
           <p>{this.state.locationHeader}</p>
           <form onSubmit={this.locationAccepted.bind(this)}>
-          <div className="form-group">
-          <input
-          className="form-control"
-          placeholder="Enter city"
-          onChange={this.handleUpdateLocation.bind(this)}
-          value={this.state.location}
-          type="text" />
-          </div>
-          <div>
-          <button type="submit">Get Weather</button>
-          </div>
+            <div className="form-group">
+              <input
+              className="form-control"
+              placeholder="Enter city"
+              onChange={this.handleUpdateLocation.bind(this)}
+              value={this.state.location}
+              type="text" />
+              </div>
+            <div>
+              <button type="submit">Get Weather</button>
+            </div>
           </form>
         </section>
 
         <section className='weather-container'>
-          <div>{data}</div>
+          <div>
+            {data}
+          </div>
         </section>
       </section>
     )
   }
 }
-  //   let forecast;
-  //   if (this.state.data.length) {
-  //     forecast = <DisplayWeather data={forecast} />
-  //   }
-  //   return (
-  //     <div>
-  //       <InputField handleSubmit={this.handleSubmitLocation.bind(this)}/>
-  //       {forecast}
-  //     </div>
-  //   )
-  // }
+
+
+
+function DisplayWeather(weatherData) {
+  debugger;
+  let weather = weatherData;
+  let summaryArray = [];
+  for (let i = 0; i < weather.length; i++) {
+    summaryArray.push(<ul key={i}>
+                        <li>{weather[i].date}</li>
+                        <li>High: {weather[i].temp.high}*</li>
+                        <li>Low: {weather[i].temp.high}*</li>
+                        <li>{weather[i].weatherType.chance * 100}% Change of Precip</li>
+                      </ul>)
+  }
+  return summaryArray;
+}
 
   module.exports = WeatherDisplay;
