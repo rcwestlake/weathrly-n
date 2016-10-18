@@ -6,3 +6,10 @@
   margin-left: 5px;
   width: 90px;
 }
+
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

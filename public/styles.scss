@@ -46,10 +46,18 @@ input {
     }
   }
 
-  .weather-container {
-    font-size: 30px;
-    width: 150px;
+  .location-header-container {
+    margin: 60px;
+
+    .location-header {
+      border: $input-border $primary-yellow;
+      font-size: $standard-size;
+      font-weight: bold;
+      padding: 8px;
+    }
+
   }
+
 }
 
 .form-group {
@@ -78,14 +86,33 @@ input {
   }
 }
 
-
-
+.weather-container {
+  @include flex;
+  width: $main-width;
+}
 
 .Today, .Monday, .Tuesday, .Wednesday, .Thursday, .Friday, .Saturday, .Sunday {
   border: 1px solid red;
   display: inline-block;
   height: 200px;
   width: 200px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  .icon {
+    background: url('../design/snow.png') no-repeat;
+    height: 42px;
+    width: 53px;
+    margin: auto;
+  }
+
+  .day {
+    font-size: $standard-size - 5;
+    margin: 15px;
+  }
+
+
 }
 
 .Today {
@@ -95,21 +122,14 @@ input {
 }
 
 
-footer {
-  height: 90px;
+.built-container {
   width: $main-width;
 
-
-  .footer-container {
-    width: $main-width;
-
-
-    small {
-      display: block;
-      float: right;
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
+  small {
+    display: block;
+    float: right;
+    margin-top: 10px;
+    font-size: 12px;
   }
 
   .small-logo {
@@ -117,4 +137,5 @@ footer {
     display: block;
     float: right;
   }
- }
+
+}

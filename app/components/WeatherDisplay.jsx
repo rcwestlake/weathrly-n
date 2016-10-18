@@ -21,7 +21,7 @@ class WeatherDisplay extends React.Component {
       source: 'http://weatherly-api.herokuapp.com/api/weather/',
       location: '',
       locationHeader: '',
-      locationTitle: '',
+      locationTitle: 'So close... enter city above',
       data: []
     }
   }
@@ -89,6 +89,10 @@ class WeatherDisplay extends React.Component {
     return (
       <section className='app-container'>
         <section className='header'>
+          <section className='built-container'>
+          <img className='small-logo' src='../design/cloudy-night.png' />
+            <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n'>Ryan W</a></small>
+          </section>
           <div className='logo'>
             <p className='title'>weathr<span className='weathr-ly'>ly</span></p>
           </div>
@@ -105,21 +109,14 @@ class WeatherDisplay extends React.Component {
             </div>
             <p className='error'>{this.state.locationHeader}</p>
           </form>
-          <h4 className='location-header'> {this.state.locationTitle}</h4>
+          <h4 className='location-header-container'><span className='location-header'>{this.state.locationTitle}</span></h4>
         </section>
 
-        <section className='weather-container' className={this.state.location}>
+        <section className='weather-container'>
           <div>
             {data}
           </div>
         </section>
-
-        <footer>
-          <section className='footer-container'>
-            <small>Built By: <a href='https://github.com/rcwestlake/weathrly-n'>Ryan W</a></small>
-          </section>
-          <img className='small-logo' src='../design/cloudy-night.png' />
-        </footer>
       </section>
     )
   }
@@ -135,7 +132,8 @@ function DisplayWeather(weatherData) {
 
   weather.forEach((item) => {
     summaryArray.push(<article className={dayMap[i]} key={i}>
-                        <h3>{dayMap[i]} - {capitalizeEachWord(weather[i].weatherType.type)}</h3>
+                        <p className='icon'></p>
+                        <h3 className='day'>{dayMap[i]} - {capitalizeEachWord(weather[i].weatherType.type)}</h3>
                         <h5 className='temp'><span className='high'>{weather[i].temp.high}&deg;</span> | <span className='low'>{weather[i].temp.low}&deg;</span></h5>
                         <h6 className='precip'>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
                         <p className='alert'>{DisplayAlert(weather, i)}</p>
