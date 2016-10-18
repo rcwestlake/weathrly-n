@@ -82,6 +82,7 @@ class WeatherDisplay extends React.Component {
     let data;
     if (this.state.data.length) {
       data = DisplayWeather(this.state.data)
+      // alert = DisplayAlert({ weather, index })
     }
     return (
       <section>
@@ -103,7 +104,7 @@ class WeatherDisplay extends React.Component {
           </form>
         </section>
 
-        <section className='weather-container'>
+        <section className='weather-container' className={this.state.location}>
           <div>
             {data}
           </div>
@@ -122,15 +123,25 @@ function DisplayWeather(weatherData) {
   let summaryArray = [];
 
   weather.forEach((item) => {
-    summaryArray.push(<ul key={i}>
-                        <li>{dayMap[i]}</li>
-                        <li>High: {weather[i].temp.high}&deg;</li>
-                        <li>Low: {weather[i].temp.high}&deg;</li>
-                        <li>{weather[i].weatherType.chance * 100}% Chance of Precip</li>
-                      </ul>)
+    summaryArray.push(<article key={i}>
+                        <h3>{dayMap[i]}</h3>
+                        <h5>High: {weather[i].temp.high}&deg;</h5>
+                        <h5>Low: {weather[i].temp.high}&deg;</h5>
+                        <h6>{Math.floor(weather[i].weatherType.chance * 100)}% Chance of Precip</h6>
+                        <p className='alert'>{DisplayAlert(weather, i)}</p>
+                      </article>)
   i++;
   })
   return summaryArray;
+}
+
+function DisplayAlert(weather, index) {
+  debugger;
+  if (weather[index].weatherType.scale > 2) {
+    return (
+      <span className='alert'>Severe weather expected. Stay safe.</span>
+    )
+  }
 }
 
   module.exports = WeatherDisplay;
