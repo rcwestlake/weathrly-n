@@ -47,7 +47,7 @@
 	'use strict';
 
 	__webpack_require__(1);
-	__webpack_require__(175);
+	__webpack_require__(176);
 
 	//components need for app
 	//app
@@ -73,6 +73,7 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(35);
 	var $ = __webpack_require__(173);
+	var WeatherDisplay = __webpack_require__(175);
 
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -80,17 +81,13 @@
 	  function App() {
 	    _classCallCheck(this, App);
 
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 	  }
 
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      return React.createElement(
-	        'h1',
-	        null,
-	        'Hello World'
-	      );
+	      return React.createElement(WeatherDisplay, null);
 	    }
 	  }]);
 
@@ -23288,13 +23285,246 @@
 /* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(2);
+	var ReactDOM = __webpack_require__(35);
+	var $ = __webpack_require__(173);
+
+	var dayMap = {
+	  '0': 'Today',
+	  '1': 'Mon',
+	  '2': 'Tue',
+	  '3': 'Wed',
+	  '4': 'Thu',
+	  '5': 'Fri',
+	  '6': 'Sat',
+	  '7': 'Sun'
+	};
+
+	var WeatherDisplay = function (_React$Component) {
+	  _inherits(WeatherDisplay, _React$Component);
+
+	  function WeatherDisplay() {
+	    _classCallCheck(this, WeatherDisplay);
+
+	    var _this = _possibleConstructorReturn(this, (WeatherDisplay.__proto__ || Object.getPrototypeOf(WeatherDisplay)).call(this));
+
+	    _this.state = {
+	      source: 'http://weatherly-api.herokuapp.com/api/weather/',
+	      location: '',
+	      locationHeader: '',
+	      data: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(WeatherDisplay, [{
+	    key: 'locationAccepted',
+	    value: function locationAccepted(e) {
+	      e.preventDefault();
+
+	      var locationFormatted = this.state.location.replace(' ', '-').toLowerCase();
+
+	      if (locationFormatted === 'denver' || locationFormatted === 'san-diego' || locationFormatted === 'san-fransico' || locationFormatted === 'castle-rock') {
+
+	        this.apiRequest = $.get(this.state.source + locationFormatted, function (result) {
+	          this.setState({
+	            data: result
+	          });
+	          console.log('first log: ', this.state.data);
+	          var weatherInfo = this.state.data;
+	        }.bind(this));
+
+	        this.resetLocation();
+	      } else {
+	        this.setState({
+	          locationHeader: 'Please enter a valid city' //or link to Google or weatherunderground
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var retrievedLocation = JSON.parse(localStorage.getItem('location'));
+	      this.setState({
+	        location: ''
+	      });
+	    }
+	  }, {
+	    key: 'handleUpdateLocation',
+	    value: function handleUpdateLocation(e) {
+	      var storedLocation = localStorage.setItem('location', JSON.stringify(this.state.location));
+	      this.setState({
+	        location: e.target.value
+	      });
+	    }
+	  }, {
+	    key: 'submitHandled',
+	    value: function submitHandled(e) {
+	      e.preventDefault();
+	      this.props.handleSubmit(this.state.location);
+	      this.setState({
+	        location: ''
+	      });
+	    }
+	  }, {
+	    key: 'resetLocation',
+	    value: function resetLocation() {
+	      this.setState({
+	        location: '',
+	        locationHeader: ''
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var data = void 0;
+	      if (this.state.data.length) {
+	        data = DisplayWeather(this.state.data);
+	        // alert = DisplayAlert({ weather, index })
+	      }
+	      return React.createElement(
+	        'section',
+	        null,
+	        React.createElement(
+	          'section',
+	          { className: 'header' },
+	          React.createElement(
+	            'div',
+	            { className: 'title' },
+	            'weathr',
+	            React.createElement(
+	              'span',
+	              { className: 'weathr-ly' },
+	              'ly'
+	            )
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.locationHeader
+	          ),
+	          React.createElement(
+	            'form',
+	            { onSubmit: this.locationAccepted.bind(this) },
+	            React.createElement(
+	              'div',
+	              { className: 'form-group' },
+	              React.createElement('input', {
+	                className: 'form-control',
+	                placeholder: 'Enter city',
+	                onChange: this.handleUpdateLocation.bind(this),
+	                value: this.state.location,
+	                type: 'text' })
+	            ),
+	            React.createElement(
+	              'div',
+	              null,
+	              React.createElement(
+	                'button',
+	                { type: 'submit' },
+	                'Get Weather'
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'section',
+	          _defineProperty({ className: 'weather-container' }, 'className', this.state.location),
+	          React.createElement(
+	            'div',
+	            null,
+	            data
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return WeatherDisplay;
+	}(React.Component);
+
+	function DisplayWeather(weatherData) {
+	  debugger;
+	  var i = 0;
+	  var weather = weatherData;
+	  var summaryArray = [];
+
+	  weather.forEach(function (item) {
+	    summaryArray.push(React.createElement(
+	      'article',
+	      { key: i },
+	      React.createElement(
+	        'h3',
+	        null,
+	        dayMap[i]
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'High: ',
+	        weather[i].temp.high,
+	        '\xB0'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'Low: ',
+	        weather[i].temp.high,
+	        '\xB0'
+	      ),
+	      React.createElement(
+	        'h6',
+	        null,
+	        Math.floor(weather[i].weatherType.chance * 100),
+	        '% Chance of Precip'
+	      ),
+	      React.createElement(
+	        'p',
+	        { className: 'alert' },
+	        DisplayAlert(weather, i)
+	      )
+	    ));
+	    i++;
+	  });
+	  return summaryArray;
+	}
+
+	function DisplayAlert(weather, index) {
+	  debugger;
+	  if (weather[index].weatherType.scale > 2) {
+	    return React.createElement(
+	      'span',
+	      { className: 'alert' },
+	      'Severe weather expected. Stay safe.'
+	    );
+	  }
+	}
+
+	module.exports = WeatherDisplay;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(177);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
+	var update = __webpack_require__(179)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -23311,21 +23541,21 @@
 	}
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(177)();
+	exports = module.exports = __webpack_require__(178)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body {\n  background: red; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23381,7 +23611,7 @@
 	};
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
